@@ -1,0 +1,13 @@
+version: '3'
+services:
+    mintoo:
+        container_name: batch
+        build: ./
+        volumes:
+            - "./batch:/go/src/batch"
+        tty: true
+        environment:
+            - DB_READ_USER=user:pass
+            - DB_WRITE_USER=user:pass
+            - READ_CONNECTION=unix(/cloudsql/{PROJECT_ID}:asia-northeast1:{INSTANCE_ID})/{DB}?parseTime=true&loc=Asia%2FTokyo
+            - WRITE_CONNECTION=unix(/cloudsql/{PROJECT_ID}:asia-northeast1:{INSTANCE_ID})/{DB}?parseTime=true&loc=Asia%2FTokyo
